@@ -1,6 +1,9 @@
 import express from "express";
+import cors from "cors";
 
 const app = express();
+
+app.use(cors({ origin: ["http://localhost:5173"] }));
 
 const sampleEmployee = {
 	name: {
@@ -13,12 +16,12 @@ const sampleEmployee = {
 	},
 };
 
+app.get("/api/employees", (req, res) => {
+	res.json({ results: sampleEmployee });
+});
+
 const port = 3310;
 
 app.listen(port, () => {
 	console.log(`Listening on port ${port}`);
-});
-
-app.get("/api/employees", (req, res) => {
-	res.json({ results: sampleEmployee });
 });
